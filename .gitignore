@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -30,3 +28,19 @@ yarn-error.log*
 
 # local environment
 .env*
+
+# deployment and generated files
+.vercel
+next-env.d.ts
+/dist/
+/.wrangler/
+/.local/
+/.pnpm-home/
+preview.*.log
+/outputs/
+/work/
+/public/media/the-command-suite-live-walkthrough.mp4
+
+# local Cloudflare secrets
+.dev.vars*
+*.tsbuildinfo
