@@ -48,6 +48,28 @@ const localBindingConfig = {
     : [],
 };
 
+// vinext's <Link> loads its router with `await import("./navigation.js")`. The production
+// bundler merges that module into a shared chunk and renames its exports, so the lookup
+// returns undefined and every link click silently does nothing. A static namespace import
+// keeps the real export names, so links navigate again.
+const fixVinextLinkNavigation = {
+  name: 'fix-vinext-link-navigation',
+  enforce: 'pre' as const,
+  transform(code: string, id: string) {
+    if (!/vinext[\\/]dist[\\/]shims[\\/]link\.js$/.test(id.split('?')[0])) return null;
+    const modules = ['./navigation.js', '../server/app-elements.js', '../server/app-rsc-cache-busting.js', '../server/app-rsc-render-mode.js', '../server/headers.js'];
+    let header = '';
+    let out = code;
+    modules.forEach((path, index) => {
+      const dynamic = `import("${path}")`;
+      if (!out.includes(dynamic)) return;
+      header += `import * as __vinextLinkModule${index} from "${path}";\n`;
+      out = out.replaceAll(dynamic, `Promise.resolve(__vinextLinkModule${index})`);
+    });
+    return header ? { code: header + out, map: null } : null;
+  },
+};
+
 export default defineConfig(async () => {
   // Keep Wrangler and Miniflare state project-local. These are non-secret tool
   // settings; application environment belongs in ignored `.env*` files.
@@ -68,6 +90,7 @@ export default defineConfig(async () => {
         : {}),
     },
     plugins: [
+      fixVinextLinkNavigation,
       vinext(),
       sites(),
       cloudflare({
