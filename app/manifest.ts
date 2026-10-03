@@ -1,0 +1,2 @@
+import type { MetadataRoute } from 'next';
+export default function manifest():MetadataRoute.Manifest{return{name:'The Command Suite',short_name:'Command Suite',description:'Manage customers, jobs, field updates, schedules, files, approvals, and office follow-up in one connected contractor CRM.',start_url:'/command',display:'standalone',background_color:'#F8F3EB',theme_color:'#3C302B',icons:[{src:'/logo-brand.png',sizes:'512x512',type:'image/png'}]}}

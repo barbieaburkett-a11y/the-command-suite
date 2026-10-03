@@ -1,0 +1,18 @@
+type PacketPdf={title:string;subtitle:string;workspaceName:string;jobName:string;packetType:string;createdAt:string;sections:Array<{heading:string;body:string}>};
+const ascii=(value:string)=>value.normalize('NFKD').replace(/[^\x20-\x7E\n]/g,'').replaceAll('\\','\\\\').replaceAll('(','\\(').replaceAll(')','\\)');
+const wrap=(value:string,width=88)=>{const out:string[]=[];for(const paragraph of value.split(/\n+/)){let line='';for(const word of paragraph.split(/\s+/).filter(Boolean)){if((line+' '+word).trim().length>width){out.push(line);line=word}else line=(line+' '+word).trim()}if(line)out.push(line);if(!paragraph.trim())out.push('')}return out};
+export function buildPacketPdf(input:PacketPdf){
+  const pages:Array<Array<{text:string;size:number;bold?:boolean;color?:string}>>=[];let page:Array<{text:string;size:number;bold?:boolean;color?:string}>=[];let used=0;
+  const add=(text:string,size=10,bold=false,color='2D2B2A')=>{for(const line of wrap(text,size>=18?58:88)){if(used+(size+7)>690){pages.push(page);page=[];used=0}page.push({text:line,size,bold,color});used+=size+7}};
+  add('THE COMMAND SUITE',10,true,'A77B36');add(' ',8);add(input.title,24,true);add(input.subtitle,11,false,'5C5752');add(`${input.workspaceName}  |  ${input.jobName}  |  ${input.packetType}`,9,true,'6A625C');add(`Prepared ${new Date(input.createdAt).toLocaleString('en-US')}`,8,false,'6A625C');add(' ',6);
+  for(const section of input.sections){add(section.heading.toUpperCase(),12,true,'A77B36');add(section.body||'No verified workspace records were available for this section.',10);add(' ',5)}
+  if(page.length||!pages.length)pages.push(page);
+  const objects:string[]=[];const addObject=(body:string)=>{objects.push(body);return objects.length};
+  const font=addObject('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');const bold=addObject('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
+  const pageIds:number[]=[],contentIds:number[]=[];
+  for(let index=0;index<pages.length;index++){let y=738;const commands=['q','0.97 0.95 0.93 rg','0 0 612 792 re f','Q'];for(const item of pages[index]){const rgb=item.color==='A77B36'?'0.65 0.48 0.21':item.color==='6A625C'||item.color==='5C5752'?'0.36 0.34 0.32':'0.18 0.17 0.16';commands.push('BT',`${rgb} rg`,`/${item.bold?'F2':'F1'} ${item.size} Tf`,`54 ${y} Td`,`(${ascii(item.text)}) Tj`,'ET');y-=item.size+7}commands.push('BT','0.42 0.39 0.36 rg','/F1 8 Tf',`54 28 Td`,`(Protected workspace export  |  Page ${index+1} of ${pages.length}) Tj`,'ET');const stream=commands.join('\n');contentIds.push(addObject(`<< /Length ${new TextEncoder().encode(stream).length} >>\nstream\n${stream}\nendstream`));pageIds.push(addObject('PENDING'))}
+  const pagesId=objects.length+1,catalogId=objects.length+2;for(let i=0;i<pageIds.length;i++)objects[pageIds[i]-1]=`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 ${font} 0 R /F2 ${bold} 0 R >> >> /Contents ${contentIds[i]} 0 R >>`;
+  addObject(`<< /Type /Pages /Kids [${pageIds.map(id=>`${id} 0 R`).join(' ')}] /Count ${pageIds.length} >>`);addObject(`<< /Type /Catalog /Pages ${pagesId} 0 R >>`);
+  let output='%PDF-1.4\n';const offsets=[0];objects.forEach((body,index)=>{offsets.push(new TextEncoder().encode(output).length);output+=`${index+1} 0 obj\n${body}\nendobj\n`});const xref=new TextEncoder().encode(output).length;output+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n${offsets.slice(1).map(offset=>`${String(offset).padStart(10,'0')} 00000 n `).join('\n')}\ntrailer\n<< /Size ${objects.length+1} /Root ${catalogId} 0 R >>\nstartxref\n${xref}\n%%EOF`;
+  return new TextEncoder().encode(output);
+}

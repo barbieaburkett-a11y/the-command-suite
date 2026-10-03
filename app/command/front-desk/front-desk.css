@@ -1,0 +1,79 @@
+.fd-intro{grid-template-columns:1fr 150px 150px 150px}
+.fd-trial{margin:14px 0 0;font:12px monospace;color:#aaa397}
+.fd-body{max-width:1100px;margin:0 auto}
+.fd-muted{color:#6b665c;line-height:1.55}
+.fd-button{border:1px solid #171713;background:#fffaf0;color:#171713;border-radius:999px;padding:10px 16px;font-weight:800;cursor:pointer;font-size:14px}
+.fd-button:hover:not(:disabled){background:#171713;color:#f2ebdc}
+.fd-button.primary{background:#f26a21;border-color:#f26a21;color:#171713}
+.fd-button.primary:hover:not(:disabled){background:#171713;border-color:#171713;color:#f2ebdc}
+.fd-button.quiet{border-color:transparent;background:transparent;text-decoration:underline}
+.fd-button:disabled{opacity:.5;cursor:not-allowed}
+.fd-link{border:0;background:none;color:#a3420c;text-decoration:underline;cursor:pointer;padding:6px 0;font-weight:700}
+.fd-alert{background:#fde3d3;border-left:4px solid #c2410c;padding:10px 14px;border-radius:8px;color:#5a1d03}
+.fd-notice{background:#e5efe0;border-left:4px solid #4d7c3a;padding:10px 14px;border-radius:8px;color:#1f3a14}
+.fd-banner{background:#fff4d6;border:1px solid #e6c56b;border-radius:14px;padding:6px 18px;margin-bottom:24px}
+.fd-banner p{margin:10px 0;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.fd-banner button{border:0;background:none;font-weight:800;color:#a3420c;cursor:pointer;text-decoration:underline}
+.fd-list{display:grid;gap:10px}
+.fd-row{display:grid;gap:6px;text-align:left;background:#fffaf0;border:1px solid #d8cdb8;border-left:5px solid #d8cdb8;border-radius:14px;padding:16px 18px;cursor:pointer;font:inherit;color:inherit;width:100%}
+.fd-row:hover,.fd-row:focus-visible{border-color:#171713;outline:none}
+.fd-row.cat-lead{border-left-color:#f26a21}.fd-row.cat-needs_owner{border-left-color:#b91c1c}.fd-row.cat-help{border-left-color:#2f6fb0}.fd-row.cat-partner{border-left-color:#6d5ba8}.fd-row.cat-spam{opacity:.6}
+.fd-row-top{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.fd-row-top time{margin-left:auto;font:12px monospace;color:#6b665c}
+.fd-row strong{font-size:17px}
+.fd-summary{color:#3d3a33;line-height:1.45}
+.fd-next{font-size:14px;color:#6b4a12;font-weight:700;margin:0}
+.fd-chip{font:700 11px/1 system-ui,sans-serif;padding:5px 9px;border-radius:999px;background:#ece3d1;color:#3d3a33}
+.fd-chip.ghost{background:transparent;border:1px solid #d8cdb8}
+.fd-chip.due{background:#b91c1c;color:#fff}
+.fd-chip.status-reply_ready{background:#f26a21;color:#171713}
+.fd-chip.status-new{background:#171713;color:#f2ebdc}
+.fd-chip.status-waiting_on_them{background:#dbe7f3;color:#173b5e}
+.fd-chip.status-customer,.fd-chip.status-trial{background:#dcecd3;color:#1f3a14}
+.fd-mini-stats{display:flex;gap:24px;margin-top:18px;color:#6b665c;font-size:14px}
+.fd-filters{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.fd-filters input,.fd-filters select{padding:10px 12px;border:1px solid #c9bda6;border-radius:10px;background:#fffaf0;font:inherit}
+.fd-filters input{flex:1;min-width:220px}
+.fd-overlay{position:fixed;inset:0;background:rgba(17,18,15,.55);z-index:50;display:flex;justify-content:flex-end}
+.fd-drawer{width:min(640px,100%);height:100%;overflow:auto;background:#f8f2e6;padding:30px 28px 60px;position:relative;box-shadow:-10px 0 40px rgba(0,0,0,.25)}
+.fd-drawer h2{font-size:30px;margin:6px 0 8px;letter-spacing:-.03em}
+.fd-drawer h3{margin:28px 0 10px;font-size:18px}
+.fd-close{position:absolute;top:14px;right:16px;border:0;background:none;font-size:32px;cursor:pointer;line-height:1}
+.fd-kicker{font:700 10px monospace;letter-spacing:.12em;color:#a3420c;text-transform:uppercase}
+.fd-lead-summary{font-size:17px;line-height:1.5;margin:0 0 14px}
+.fd-contact{display:grid;gap:6px;margin:12px 0}
+.fd-copy{display:grid;grid-template-columns:90px 1fr auto;gap:10px;align-items:center;background:#fffaf0;border:1px solid #e1d6c2;border-radius:10px;padding:8px 12px}
+.fd-copy small{font:700 10px monospace;color:#6b665c;text-transform:uppercase}
+.fd-copy span,.fd-copy a{overflow-wrap:anywhere}
+.fd-copy button{border:0;background:#ece3d1;border-radius:999px;padding:5px 10px;font-weight:700;cursor:pointer}
+.fd-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.fd-controls label,.fd-modal label{display:grid;gap:5px;font-size:13px;font-weight:700}
+.fd-controls select,.fd-controls input,.fd-modal input,.fd-modal select,.fd-modal textarea,.fd-drawer textarea,.fd-playbook textarea,.fd-playbook input,.fd-inline input{padding:10px 12px;border:1px solid #c9bda6;border-radius:10px;background:#fffefb;font:inherit;font-weight:400;width:100%;box-sizing:border-box}
+.fd-drawer textarea{line-height:1.55;resize:vertical}
+.fd-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.fd-thread{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.fd-thread li{background:#fffaf0;border:1px solid #e1d6c2;border-radius:12px;padding:12px 14px}
+.fd-thread li.out{background:#f1ece0;margin-left:36px}
+.fd-thread small{display:block;font:11px monospace;color:#6b665c;margin-bottom:6px}
+.fd-thread p{white-space:pre-wrap;margin:6px 0 0;line-height:1.5}
+.fd-modal{margin:auto;width:min(620px,94vw);max-height:92vh;overflow:auto;background:#f8f2e6;border-radius:18px;padding:26px;display:grid;gap:12px;align-self:center}
+.fd-overlay:has(.fd-modal){justify-content:center}
+.fd-modal h2{margin:0}
+.fd-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fd-playbook{display:grid;gap:18px;max-width:780px}
+.fd-playbook label{display:grid;gap:4px}
+.fd-playbook span{font-size:13px;color:#6b665c}
+.fd-setup article{background:#fffaf0;border:1px solid #e1d6c2;border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.fd-setup h3{margin:0 0 6px}
+.fd-inline{display:flex;gap:8px;max-width:520px}
+.fd-code{background:#171713;color:#f2ebdc;padding:14px;border-radius:10px;overflow:auto;font-size:12px;line-height:1.5;white-space:pre}
+.fd-status{margin:0;padding-left:18px;line-height:1.8}
+.fd-status li.ok{color:#2f5a1f}
+@media (max-width:760px){
+  .fd-intro{grid-template-columns:1fr 1fr 1fr}.fd-intro>div:first-child{grid-column:1/-1}
+  .fd-intro .command-stat{padding:12px}.fd-intro .command-stat b{font-size:32px}
+  .fd-controls,.fd-grid{grid-template-columns:1fr}
+  .fd-drawer{padding:24px 16px 60px}
+  .fd-copy{grid-template-columns:70px 1fr auto}
+  .fd-thread li.out{margin-left:12px}
+}

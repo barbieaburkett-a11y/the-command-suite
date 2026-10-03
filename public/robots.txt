@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /command$
+Disallow: /command/
+Disallow: /welcome
+
+Sitemap: https://thecommandsuite.com/sitemap.xml
+Host: https://thecommandsuite.com

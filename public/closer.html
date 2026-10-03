@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#15191f">
+  <title>Sales conversation dashboard | The Command Suite</title>
+  <style>
+    :root{color-scheme:light;--ink:#171a1f;--muted:#5e6570;--line:#dce0e5;--paper:#f4f5f7;--card:#fff;--gold:#c69d59;--rose:#e9cbd0;--low:#247154;--mid:#9a681f;--high:#a93e4a;--radius:20px;font-family:Arial,Helvetica,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.48}
+    button,input{font:inherit}button,a,input{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #6c4b12;outline-offset:3px}
+    .shell{max-width:1500px;margin:auto;padding:24px clamp(16px,3vw,44px) 56px}
+    .topbar{background:var(--ink);color:#fff;border-radius:24px;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.075em;text-transform:uppercase;font-size:14px}.brand img{width:34px;height:34px;object-fit:contain}.top-meta{color:#e3e6e8;font-size:14px;text-align:right}.top-meta strong{color:#f4d29b}
+    .intro{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:32px 0 24px;flex-wrap:wrap}.eyebrow{color:#805d2d;text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800}.intro h1{font-size:clamp(30px,3.4vw,52px);letter-spacing:-.045em;line-height:1.08;margin:8px 0 6px}.intro p{color:var(--muted);margin:0;max-width:700px}.client{min-width:min(100%,310px)}.client label{display:block;font-weight:700;font-size:14px;margin-bottom:7px}.client input{width:100%;border:1px solid #bcc4cc;background:#fff;padding:13px 15px;border-radius:12px;color:var(--ink)}
+    .layout{display:grid;grid-template-columns:minmax(0,1.36fr) minmax(325px,.64fr);gap:18px;align-items:start}.stack{display:grid;gap:18px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 28px rgba(13,22,33,.035);padding:clamp(20px,2.2vw,30px)}.card h2{margin:4px 0 6px;font-size:clamp(23px,2vw,30px);letter-spacing:-.03em;line-height:1.15}.sub{color:var(--muted);margin:0 0 22px}.section-number{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;background:#f2e2e4;border-radius:8px;color:#5d323b;font-size:13px;font-weight:800;margin-right:8px}.title-row{display:flex;align-items:center}
+    .assess-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.slider-card{border:1px solid var(--line);border-left:5px solid var(--low);border-radius:14px;padding:17px;background:#fff;transition:border-color .2s,background .2s}.slider-card[data-level="medium"]{border-left-color:var(--mid);background:#fffcf7}.slider-card[data-level="high"]{border-left-color:var(--high);background:#fff9fa}.slider-head{display:flex;justify-content:space-between;gap:12px;font-size:15px;font-weight:750}.score{font-variant-numeric:tabular-nums;color:var(--low);font-size:18px}.slider-card[data-level="medium"] .score{color:var(--mid)}.slider-card[data-level="high"] .score{color:var(--high)}.slider-card p{font-size:13px;color:var(--muted);margin:5px 0 15px;min-height:38px}.range{width:100%;accent-color:#8e6670;cursor:pointer}.scale{display:flex;justify-content:space-between;color:#6b737c;font-size:12px;margin-top:5px}
+    .gauge-card{background:#20252c;color:#fff;border-radius:var(--radius);padding:28px;min-height:100%}.gauge-card .eyebrow{color:#e4bd7c}.gauge-card h2{font-size:27px}.gauge-wrap{display:flex;align-items:center;gap:24px;margin:22px 0;flex-wrap:wrap}.gauge{width:180px;height:180px;flex:none;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gauge-color) calc(var(--gauge-value)*1%),#3d454f 0);position:relative}.gauge:before{content:"";position:absolute;inset:18px;background:#20252c;border-radius:50%}.gauge-inner{position:relative;text-align:center;line-height:1}.gauge-inner strong{display:block;font-size:54px;font-variant-numeric:tabular-nums;letter-spacing:-.05em}.gauge-inner span{color:#c9d0d5;font-size:13px}.gauge-copy{flex:1;min-width:160px}.risk-label{font-size:24px;font-weight:800;color:var(--gauge-color)}.gauge-copy p{color:#d8dde0;font-size:14px;margin:8px 0}.disclaimer{font-size:12px;color:#c1c9ce;border-top:1px solid #47505a;padding-top:15px;margin:8px 0 0}
+    .calc-grid{display:grid;grid-template-columns:minmax(250px,.74fr) minmax(0,1.26fr);gap:20px}.calc-controls{display:grid;gap:18px}.control{border:1px solid var(--line);border-radius:14px;padding:16px}.control label{display:flex;justify-content:space-between;gap:10px;font-weight:750}.control output{font-weight:800;font-size:18px;font-variant-numeric:tabular-nums}.control p{margin:5px 0 11px;color:var(--muted);font-size:13px}.control input[type=number]{width:100%;border:1px solid #bcc4cc;border-radius:10px;padding:11px 12px;color:var(--ink)}
+    .comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{border-radius:16px;padding:20px;background:#f2f3f5;min-width:0}.metric.offer{background:#222830;color:#fff}.metric h3{font-size:14px;text-transform:uppercase;letter-spacing:.09em;margin:0 0 13px}.metric .big{font-size:clamp(30px,3vw,44px);letter-spacing:-.05em;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.metric p{font-size:14px;margin:12px 0 0;color:var(--muted)}.metric.offer p{color:#d9dfe3}.metric dl{border-top:1px solid #d0d5db;padding-top:10px;margin:17px 0 0}.metric.offer dl{border-color:#59616c}.metric dl div{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:14px}.metric dt{color:var(--muted)}.metric.offer dt{color:#d9dfe3}.metric dd{margin:0;font-weight:750;font-variant-numeric:tabular-nums;text-align:right}.scenario{border:1px solid #d6bd91;background:#fffaf1;border-radius:14px;padding:17px;margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.scenario b{display:block;font-size:14px}.scenario strong{font-size:24px;font-variant-numeric:tabular-nums}.scenario small{display:block;color:var(--muted);max-width:550px}.formula{font-size:12px;color:var(--muted);margin:14px 0 0}
+    .roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.phase{border:1px solid var(--line);border-radius:15px;padding:18px;background:#fafbfc}.phase b{display:block;color:#785b32;font-size:12px;text-transform:uppercase;letter-spacing:.1em}.phase h3{font-size:18px;margin:8px 0}.phase p{font-size:14px;margin:0;color:#424a55}.placeholder{color:var(--muted);padding:16px;border:1px dashed #adb5bd;border-radius:13px;margin-top:16px}.button-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:13px 20px;min-height:48px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.btn-primary{background:var(--ink);color:#fff}.btn-secondary{background:#ead1d5;color:#2a1d21}.btn:hover{filter:brightness(.94)}.offer-strip{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px;border:1px solid #d6bd91;background:#fffaf1;border-radius:15px;margin:16px 0;flex-wrap:wrap}.offer-strip b{font-size:20px}.offer-strip p{font-size:14px;color:var(--muted);margin:4px 0 0}.offer-price{font-weight:800;font-size:29px;font-variant-numeric:tabular-nums}.offer-price span{font-size:14px;font-weight:600}.footer-note{color:var(--muted);font-size:13px;margin-top:15px}.footer-note a{color:#664a22}
+    @media(max-width:1000px){.layout{grid-template-columns:1fr}.gauge-card{min-height:auto}}@media(max-width:700px){.shell{padding:12px 12px 36px}.topbar{border-radius:17px}.assess-grid,.calc-grid,.comparison,.roadmap{grid-template-columns:1fr}.gauge{width:150px;height:150px}.gauge-inner strong{font-size:45px}.slider-card p{min-height:0}.intro{margin-top:24px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><img src="/logo-brand.webp" alt="">The Command Suite <span aria-hidden="true">/</span> Sales conversation</div>
+      <div class="top-meta">First 50 partners <strong>$79/month for 3 months</strong> · Then $99/month</div>
+    </header>
+    <div class="intro">
+      <div><div class="eyebrow">Live conversation worksheet</div><h1 id="page-title">Find the work that keeps piling up.</h1><p>Score the handoff, estimate its cost, and identify one practical workflow to test first.</p></div>
+      <div class="client"><label for="client-name">Client / company name</label><input id="client-name" type="text" maxlength="80" placeholder="Enter client name" autocomplete="organization"></div>
+    </div>
+    <div class="layout">
+      <div class="stack">
+        <section class="card" aria-labelledby="assessment-title">
+          <div class="title-row"><span class="section-number">1</span><div class="eyebrow">Live needs assessment</div></div>
+          <h2 id="assessment-title">Where is capacity getting squeezed?</h2><p class="sub">Move each slider from 0 (not a problem) to 10 (constant problem). These are conversation scores, not a clinical assessment.</p>
+          <div class="assess-grid">
+            <div class="slider-card" data-level="medium"><div class="slider-head"><label for="score-reentry">Duplicate entry</label><output class="score" id="value-reentry" for="score-reentry">5/10</output></div><p>How often does the office type the same job update twice?</p><input class="range score-input" id="score-reentry" data-name="Duplicate entry" type="range" min="0" max="10" value="5"><div class="scale"><span>Rarely</span><span>Constantly</span></div></div>
+            <div class="slider-card" data-level="medium"><div class="slider-head"><label for="score-details">Missing details</label><output class="score" id="value-details" for="score-details">5/10</output></div><p>How often must someone chase price, timing, photos, or context?</p><input class="range score-input" id="score-details" data-name="Missing details" type="range" min="0" max="10" value="5"><div class="scale"><span>Rarely</span><span>Constantly</span></div></div>
+            <div class="slider-card" data-level="medium"><div class="slider-head"><label for="score-approval">Approval bottlenecks</label><output class="score" id="value-approval" for="score-approval">5/10</output></div><p>How often does work stall while an owner reviews or approves?</p><input class="range score-input" id="score-approval" data-name="Approval bottlenecks" type="range" min="0" max="10" value="5"><div class="scale"><span>Rarely</span><span>Constantly</span></div></div>
+            <div class="slider-card" data-level="medium"><div class="slider-head"><label for="score-visibility">Lost job visibility</label><output class="score" id="value-visibility" for="score-visibility">5/10</output></div><p>How often is the next action hidden in texts, email, or memory?</p><input class="range score-input" id="score-visibility" data-name="Lost job visibility" type="range" min="0" max="10" value="5"><div class="scale"><span>Rarely</span><span>Constantly</span></div></div>
+          </div>
+        </section>
+        <section class="card" aria-labelledby="cost-title">
+          <div class="title-row"><span class="section-number">2</span><div class="eyebrow">Cost of inaction calculator</div></div>
+          <h2 id="cost-title">What does this handoff cost now?</h2><p class="sub">Use the client’s own estimates. Revenue leakage is separate from staff time so it is not counted twice.</p>
+          <div class="calc-grid">
+            <div class="calc-controls">
+              <div class="control"><label for="hourly-rate">Loaded hourly rate <output id="hourly-value" for="hourly-rate">$75/hr</output></label><p>Use the cost of the person doing the rework.</p><input class="range" id="hourly-rate" type="range" min="20" max="250" step="5" value="75"></div>
+              <div class="control"><label for="lost-hours">Hours lost per week</label><p>Time spent re-entering, chasing, and reconciling.</p><input id="lost-hours" type="number" min="0" max="168" step="0.5" value="5" inputmode="decimal"></div>
+              <div class="control"><label for="revenue-leak">Revenue leakage per week</label><p>Only direct, separately identifiable missed or delayed revenue. Enter 0 if unknown.</p><input id="revenue-leak" type="number" min="0" step="25" value="0" inputmode="decimal"></div>
+            </div>
+            <div>
+              <div class="comparison">
+                <div class="metric"><h3>Estimated cost of inaction</h3><div class="big" id="annual-cost">$18,000</div><p>Annualized from the inputs at left.</p><dl><div><dt>Lost capacity</dt><dd id="capacity-cost">$18,000</dd></div><div><dt>Revenue leakage</dt><dd id="leak-cost">$0</dd></div></dl></div>
+                <div class="metric offer"><h3>Founding partner offer</h3><div class="big">$79<span style="font-size:17px"> / month</span></div><p>First 50 partners: $79/month for months 1–3, then $99/month. One scoped workflow; fit confirmed before payment.</p><dl><div><dt>First-year fee</dt><dd id="annual-fee">$1,128</dd></div><div><dt>Break-even time</dt><dd id="break-even">0.3 hr/wk</dd></div></dl></div>
+              </div>
+              <div class="scenario"><div><b>Illustrative recovery scenario</b><small>Assumes 25% of the entered annual cost is actually recovered. This is a scenario, not a promised result or measured ROI.</small></div><strong id="scenario-net">$3,372 net</strong></div>
+              <p class="formula">Method: 48 working weeks × (weekly lost hours × loaded hourly rate + separate weekly revenue leakage). First-year founding-partner fee = 3 × $79 + 9 × $99 = $1,128. Scenario net = 25% of the cost estimate − $1,128. Break-even time = $1,128 ÷ 48 ÷ hourly rate; excludes setup effort and taxes. Eligibility for the first 50 must be confirmed before checkout.</p>
+            </div>
+          </div>
+        </section>
+        <section class="card" aria-labelledby="roadmap-title">
+          <div class="title-row"><span class="section-number">3</span><div class="eyebrow">Prescription &amp; closer</div></div>
+          <h2 id="roadmap-title">Start with one repeatable job handoff.</h2><p class="sub">Generate a three-phase pilot roadmap based on the two highest needs above. Scope and delivery method are confirmed before payment.</p>
+          <div class="button-row"><button class="btn btn-secondary" id="generate" type="button">Generate custom roadmap</button><span id="roadmap-for" aria-live="polite"></span></div>
+          <div id="roadmap" class="placeholder" aria-live="polite">Set the four scores, then generate the client’s roadmap.</div>
+          <div class="offer-strip"><div><b>Founding Partner offer · one scoped workflow</b><p>$79/month for the first 3 paid months, then $99/month. Availability and billing terms are confirmed before payment.</p></div><div class="offer-price">$79<span> / month for 3 months</span></div></div>
+          <div class="button-row"><a class="btn btn-primary" id="onboard" href="/#pilot">Initiate Onboarding →</a><span class="footer-note">Opens the pilot-fit form; checkout follows only after scope and fit are confirmed.</span></div>
+          <p class="footer-note">The guided trial opens a working contractor CRM Company Workspace and configures one feasible intake channel, record type, missing-detail flow, human approval step, and practical office handoff. Advanced estimating, dispatch, invoicing, and payments remain clearly labeled planned. Keep an approved accounting system for bookkeeping, payroll, and tax reporting. <a href="/pricing">Review full offer and terms</a>.</p>
+        </section>
+      </div>
+      <aside class="gauge-card" aria-labelledby="risk-title" style="--gauge-value:50;--gauge-color:#e4bd7c">
+        <div class="eyebrow">Conversation signal</div><h2 id="risk-title">Burnout Risk Gauge</h2><div class="gauge-wrap"><div class="gauge" role="img" aria-label="Capacity pressure score: 50 out of 100"><div class="gauge-inner"><strong id="risk-score">50</strong><span>out of 100</span></div></div><div class="gauge-copy"><div class="risk-label" id="risk-label">Elevated pressure</div><p id="risk-explainer">Several handoffs may be consuming owner or office capacity.</p></div></div><p class="disclaimer">This gauge is the average of the four conversation scores. It is a business-workload indicator, not a medical or mental-health assessment.</p>
+      </aside>
+    </div>
+  </main>
+  <script>
+    (() => {
+      'use strict';
+      const $ = id => document.getElementById(id);
+      const money = n => new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+      const scoreInputs = [...document.querySelectorAll('.score-input')];
+      const hourly = $('hourly-rate');
+      const hours = $('lost-hours');
+      const leak = $('revenue-leak');
+      const gaugeCard = document.querySelector('.gauge-card');
+      const gauge = document.querySelector('.gauge');
+      const bounded = (value, max) => Math.min(max, Math.max(0, Number.isFinite(value) ? value : 0));
+      function updateScores(){
+        const values = scoreInputs.map(input => {
+          const value = Number(input.value);
+          $('value-' + input.id.replace('score-','')).textContent = value + '/10';
+          input.parentElement.dataset.level = value <= 3 ? 'low' : value <= 6 ? 'medium' : 'high';
+          input.setAttribute('aria-valuetext', value + ' out of 10');
+          return value;
+        });
+        const risk = Math.round(values.reduce((sum, value) => sum + value, 0) / values.length * 10);
+        const level = risk < 35 ? ['Manageable pressure','#83caa6','The current handoffs look relatively contained.'] : risk < 70 ? ['Elevated pressure','#e4bd7c','Several handoffs may be consuming owner or office capacity.'] : ['High pressure','#ee8992','Frequent handoff friction may be crowding out other work.'];
+        $('risk-score').textContent = risk;
+        $('risk-label').textContent = level[0];
+        $('risk-explainer').textContent = level[2];
+        gaugeCard.style.setProperty('--gauge-value',risk);
+        gaugeCard.style.setProperty('--gauge-color',level[1]);
+        gauge.setAttribute('aria-label','Capacity pressure score: ' + risk + ' out of 100, ' + level[0]);
+      }
+      function updateCost(){
+        const rate = bounded(Number(hourly.value),250);
+        const weeklyHours = bounded(Number(hours.value),168);
+        const weeklyLeak = bounded(Number(leak.value),10000000);
+        const capacity = 48 * weeklyHours * rate;
+        const leakage = 48 * weeklyLeak;
+        const annual = capacity + leakage;
+        $('hourly-value').textContent = money(rate) + '/hr';
+        $('capacity-cost').textContent = money(capacity);
+        $('leak-cost').textContent = money(leakage);
+        $('annual-cost').textContent = money(annual);
+        const firstYearFee = 3 * 79 + 9 * 99;
+        $('break-even').textContent = rate ? (firstYearFee / 48 / rate).toFixed(1) + ' hr/wk' : '—';
+        $('scenario-net').textContent = money(annual * .25 - firstYearFee) + ' net';
+      }
+      function generate(){
+        const client = $('client-name').value.trim();
+        const ranked = scoreInputs.map(input => ({name:input.dataset.name,score:Number(input.value)})).sort((a,b)=>b.score-a.score);
+        const first = ranked[0].name.toLowerCase();
+        const second = ranked[1].name.toLowerCase();
+        $('roadmap-for').textContent = client ? 'Prepared for ' + client : 'Prepared for this conversation';
+        const phases = [
+          ['Phase 1 · Capture','Choose the handoff','Use one real field update and its original text, photo, receipt, or voice note. Identify the job and capture what is needed to address ' + first + '.'],
+          ['Phase 2 · Clarify & approve','Close the missing details','Define the questions, draft record, and named approver. Review the workflow against ' + second + ' before anything is routed.'],
+          ['Phase 3 · Office handoff','Deliver a usable record','Send the approved record through the scoped delivery method and review completion quality after 30 days. No unverified integration is assumed.']
+        ];
+        const nodes = phases.map(([eyebrow,title,description]) => {
+          const article = document.createElement('article'); article.className = 'phase';
+          const b = document.createElement('b'); b.textContent = eyebrow;
+          const h3 = document.createElement('h3'); h3.textContent = title;
+          const p = document.createElement('p'); p.textContent = description;
+          article.append(b,h3,p); return article;
+        });
+        const road = $('roadmap'); road.className = 'roadmap'; road.replaceChildren(...nodes);
+      }
+      scoreInputs.forEach(input => input.addEventListener('input',updateScores));
+      [hourly,hours,leak].forEach(input => input.addEventListener('input',updateCost));
+      $('generate').addEventListener('click',generate);
+      updateScores(); updateCost();
+    })();
+  </script>
+</body>
+</html>

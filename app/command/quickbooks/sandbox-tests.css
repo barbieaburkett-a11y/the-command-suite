@@ -1,0 +1,7 @@
+.sandbox-tests div{display:flex;gap:.65rem;flex-wrap:wrap}
+.sandbox-tests button{border:0;border-radius:999px;padding:.8rem 1rem;background:#2f8058;color:#fff;font-weight:900}
+.sandbox-tests button:disabled{background:#aeb8b1}
+.sandbox-tests form{display:grid;gap:.7rem}
+.sandbox-tests textarea{width:100%;min-height:10rem;resize:vertical;border:1px solid #b9c8be;border-radius:.75rem;padding:.8rem;background:#fff;color:#202824;font:14px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
+.sandbox-tests pre{max-height:22rem;overflow:auto;border-radius:.75rem;background:#202824;color:#dff6e7;padding:1rem;font-size:.78rem;white-space:pre-wrap;word-break:break-word}
+.qb-primary code,.sandbox-tests code{font-size:.82em;word-break:break-all}

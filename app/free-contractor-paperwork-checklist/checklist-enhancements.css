@@ -1,0 +1,4 @@
+.check-list small{display:block;margin-bottom:4px;color:var(--gold-highlight);font:800 10px monospace;text-transform:uppercase}
+.score-meter{display:grid;gap:5px;margin-top:24px;padding:18px;border:1px solid var(--champagne-gold);border-radius:17px;background:var(--warm-white)}
+.score-meter strong{font-size:24px}
+.score-meter span{font:14px/1.45 Georgia,serif}
