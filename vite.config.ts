@@ -23,7 +23,8 @@ const cf = {
 };
 
 const localBindingConfig = {
-  ...(cf.workerName ? { name: cf.workerName } : {}),
+  // keep_vars: settings typed in the Cloudflare dashboard survive each deploy.
+  ...(cf.workerName ? { name: cf.workerName, keep_vars: true } : {}),
   main: 'vinext/server/app-router-entry',
   compatibility_flags: ['nodejs_compat'],
   d1_databases: d1
