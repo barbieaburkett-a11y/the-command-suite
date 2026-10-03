@@ -18,7 +18,8 @@ const cf = {
   workerName: process.env.CF_WORKER_NAME,
   d1Name: process.env.CF_D1_DATABASE_NAME || 'site-creator-d1',
   d1Id: process.env.CF_D1_DATABASE_ID || SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
-  r2Bucket: process.env.CF_R2_BUCKET || 'site-creator-r2',
+  // On our own account the bucket is optional until R2 is switched on (uploads then fail softly).
+  r2Bucket: process.env.CF_WORKER_NAME ? process.env.CF_R2_BUCKET || '' : process.env.CF_R2_BUCKET || 'site-creator-r2',
 };
 
 const localBindingConfig = {
@@ -36,7 +37,7 @@ const localBindingConfig = {
         },
       ]
     : [],
-  r2_buckets: r2
+  r2_buckets: r2 && cf.r2Bucket
     ? [
         {
           binding: r2,
