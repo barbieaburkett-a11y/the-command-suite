@@ -26,6 +26,8 @@ export function contractorAuth() {
     database: runtime.DB,
     secret,
     baseURL,
+    // Cloudflare logs drop an Error's message line, so spell out the message and cause.
+    logger: { log: (level, message, ...args) => console[level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log'](`[Better Auth] ${message}`, ...args.map(arg => arg instanceof Error ? `${arg.name}: ${arg.message}${arg.cause ? ` | cause: ${arg.cause instanceof Error ? arg.cause.message : String(arg.cause)}` : ''}` : arg)) },
     emailAndPassword: {
       enabled: true,
       minPasswordLength: 12,
