@@ -4,6 +4,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://thecommandsuite.com';
   return [
     { url: `${base}/`, lastModified: new Date('2026-09-29'), changeFrequency: 'weekly', priority: 1 },
+    { url: `${base}/front-desk`, lastModified: new Date('2026-10-05'), changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${base}/trial`, lastModified: new Date('2026-10-05'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${base}/see-it-done`, lastModified: new Date('2026-10-05'), changeFrequency: 'weekly', priority: 0.7 },
     { url: `${base}/product`, lastModified: new Date('2026-09-29'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${base}/command-inbox`, lastModified: new Date('2026-09-29'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${base}/how-it-works`, lastModified: new Date('2026-09-29'), changeFrequency: 'weekly', priority: 0.8 },

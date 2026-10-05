@@ -27,7 +27,7 @@ export default function AccessLeadForm() {
   if (status === 'saved') return <section className="access-confirmation" role="status">
     <span aria-hidden="true">✓</span>
     <h2>Your workflow is ready for review.</h2>
-    <p>We saved your request and will reply from hello@thecommandsuite.com within two business days. No ChatGPT account is needed for this review.</p>
+    <p>We saved your request and will reply from hello@thecommandsuite.com within one business day. No ChatGPT account is needed for this review.</p>
     <a className="primary" href="/see-it-done">See examples while you wait →</a>
   </section>;
 

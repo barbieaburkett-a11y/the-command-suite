@@ -24,7 +24,7 @@ export async function frontDeskApi(): Promise<{ context: FrontDeskContext; respo
   const context = await workspaceContext();
   const denied = workspaceAccessResponse(context);
   if (denied || !context) return { response: denied || Response.json({ error: 'Sign in required' }, { status: 401 }) };
-  if (!(await frontDeskAllowed(context))) return { response: Response.json({ error: 'Command Front Desk is not part of your plan yet.', code: 'upgrade_required', upgradePath: '/pricing' }, { status: 403 }) };
+  if (!(await frontDeskAllowed(context))) return { response: Response.json({ error: 'Command Front Desk is not part of your plan yet.', code: 'upgrade_required', upgradePath: '/front-desk#front-desk-pricing' }, { status: 403 }) };
   return { context: toFrontDesk(context) };
 }
 
@@ -33,7 +33,7 @@ export async function requireFrontDesk() {
   const context = await workspaceContext();
   if (!context) redirect('/login');
   if (!context.hasProductAccess) redirect('/trial-ended');
-  if (!(await frontDeskAllowed(context))) redirect('/pricing?product=front-desk');
+  if (!(await frontDeskAllowed(context))) redirect('/front-desk#front-desk-pricing');
   return { ...toFrontDesk(context), trialDaysRemaining: context.trialDaysRemaining };
 }
 
