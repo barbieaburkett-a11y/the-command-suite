@@ -12,10 +12,15 @@ const runtime = env as unknown as Runtime;
 
 function settings() {
   const secret = runtime.BETTER_AUTH_SECRET || process.env.BETTER_AUTH_SECRET;
-  const baseURL = runtime.BETTER_AUTH_URL || process.env.BETTER_AUTH_URL;
-  if (!secret || secret.length < 32 || !baseURL) throw new Error('Contractor authentication is not configured');
+  const configuredURL = runtime.BETTER_AUTH_URL || process.env.BETTER_AUTH_URL;
+  // The live site is thecommandsuite.com; an old workers.dev setting must not send sign-ins elsewhere.
+  const baseURL = !configuredURL || /\.workers\.dev\/?$/.test(configuredURL) ? PRODUCTION_URL : configuredURL;
+  if (!secret || secret.length < 32) throw new Error('Contractor authentication is not configured');
   return { secret, baseURL };
 }
+
+const PRODUCTION_URL = 'https://thecommandsuite.com';
+const TRUSTED_ORIGINS = [PRODUCTION_URL, 'https://www.thecommandsuite.com', 'https://the-command-suite.barbieaburkett.workers.dev'];
 
 export function contractorAuth() {
   const { secret, baseURL } = settings();
@@ -26,6 +31,7 @@ export function contractorAuth() {
     database: runtime.DB,
     secret,
     baseURL,
+    trustedOrigins: TRUSTED_ORIGINS,
     // Cloudflare logs drop an Error's message line, so spell out the message and cause.
     logger: { log: (level, message, ...args) => console[level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log'](`[Better Auth] ${message}`, ...args.map(arg => arg instanceof Error ? `${arg.name}: ${arg.message}${arg.cause ? ` | cause: ${arg.cause instanceof Error ? arg.cause.message : String(arg.cause)}` : ''}` : arg)) },
     emailAndPassword: {
