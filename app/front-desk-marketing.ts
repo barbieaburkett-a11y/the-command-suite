@@ -1,4 +1,5 @@
 // Public copy for the Command Front Desk page. Keep every "Available now" line true to what the app does today.
+import { checkoutLinks } from './checkout-links';
 
 export const frontDeskStatus = [
   ['Available now', 'Website lead form', 'Paste one snippet into your site. Each new lead lands in Front Desk with a reply ready, and you get an email alert.'],
@@ -17,6 +18,7 @@ export const frontDeskPlans = [
     summary: 'You approve every reply.',
     includes: ['Website lead form for your site', 'Suggested replies in your voice', 'Approve and send from your phone', 'Lead list with follow-up reminders'],
     featured: true,
+    checkout: checkoutLinks.frontDesk,
   },
   {
     name: 'Front Desk + Reels',
@@ -25,6 +27,7 @@ export const frontDeskPlans = [
     summary: 'Win the lead and fill the feed.',
     includes: ['Everything in Front Desk', 'Instagram Reels made for your business', 'Each Reel posted only after your OK'],
     featured: false,
+    checkout: checkoutLinks.frontDeskReels,
   },
   {
     name: 'Done For You',
@@ -33,6 +36,7 @@ export const frontDeskPlans = [
     summary: 'We run it with you.',
     includes: ['Everything in Front Desk + Reels', 'We set up and tune your Playbook', 'Hands-on help from Barbie every month'],
     featured: false,
+    checkout: checkoutLinks.doneForYou,
   },
 ] as const;
 

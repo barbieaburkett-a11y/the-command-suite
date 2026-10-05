@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import MarketingShell from '../MarketingShell';
 import { frontDeskFaq, frontDeskPlans, frontDeskStatus } from '../front-desk-marketing';
+import { checkoutLinks } from '../checkout-links';
 
 export const metadata: Metadata = {
   title: 'Command Front Desk | Answer Every Contractor Lead Fast',
@@ -52,13 +53,14 @@ export default function FrontDeskPage(){return <MarketingShell><main id="main-co
   </div></section>
 
   <section className="mh-pricing" id="front-desk-pricing"><div className="os-wrap">
-    <div className="os-section-head"><div><div className="os-kicker">FRONT DESK PRICING</div><h2>Pick how much help you want.</h2></div><p>Every plan starts with the 14-day free trial, no credit card. The price and any setup fee are confirmed with you before you pay.</p></div>
+    <div className="os-section-head"><div><div className="os-kicker">FRONT DESK PRICING</div><h2>Pick how much help you want.</h2></div><p>Start with the 14-day free trial, no credit card. Ready now? Subscribe on Stripe’s secure checkout; cancel future months anytime.</p></div>
     <div className="fd-price-grid">{frontDeskPlans.map(plan=><article className="mh-price-card" key={plan.name}>
       <span>{plan.name.toUpperCase()}</span><strong>{plan.price}<small>/month</small></strong><p>{plan.setup}</p><b>{plan.summary}</b>
       <ul>{plan.includes.map(item=><li key={item}>{item}</li>)}</ul>
       <Link className={plan.featured?'os-button':'os-button os-button-outline'} href="/trial">Start free trial</Link>
+      <a className="fd-buy" href={plan.checkout}>Skip the trial and subscribe →</a>
     </article>)}</div>
-    <p className="fd-bundle">Want the full Command Suite contractor CRM too? Get The Command Suite and Command Front Desk together for <strong>$249/month</strong>. <Link href="/contact">Ask about the bundle →</Link></p>
+    <p className="fd-bundle"><strong>Bundle and save.</strong> Get The Command Suite contractor CRM and Command Front Desk together for <strong>$249/month</strong> instead of $298, with the same $299 one-time setup. That’s $49 saved every month, $588 a year. <a href={checkoutLinks.bundle}>Get the bundle →</a> or <Link href="/contact">ask a question</Link>.</p>
   </div></section>
 
   <section className="mh-faq"><div className="os-wrap"><div className="os-kicker">FREQUENT QUESTIONS</div><h2>Clear answers before you start.</h2><div className="mh-faq-list">{frontDeskFaq.map(item=><details key={item.question}><summary>{item.question}<span aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div></div></section>
