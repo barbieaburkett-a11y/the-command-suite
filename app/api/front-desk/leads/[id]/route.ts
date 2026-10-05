@@ -17,7 +17,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   try {
     if (body.action === 'redraft') {
       const result = await triageLead(context.db, context.workspaceId, context.workspaceName, id);
-      if (!result.ok) throw new Error(result.reason === 'ai_not_configured' ? 'AI drafting is not switched on yet.' : result.reason === 'not_found' ? 'Lead not found.' : 'The AI could not draft a reply right now. Try again in a minute.');
+      if (!result.ok) throw new Error(result.reason === 'ai_not_configured' ? 'AI drafting is not switched on yet.' : result.reason === 'not_found' ? 'Lead not found.' : `The AI could not draft a reply right now.${'detail' in result && result.detail ? ` (${result.detail})` : ' Try again in a minute.'}`);
       return Response.json({ ok: true });
     }
     return Response.json({ error: 'Unknown action.' }, { status: 400 });

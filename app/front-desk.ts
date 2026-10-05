@@ -165,7 +165,11 @@ async function callClaude(system: string, user: string) {
     headers: { 'x-api-key': setting('ANTHROPIC_API_KEY'), 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({ model: setting('FRONT_DESK_MODEL') || 'claude-sonnet-4-5', max_tokens: 1500, system, messages: [{ role: 'user', content: user }], tools: [triageTool], tool_choice: { type: 'tool', name: triageTool.name } }),
   });
-  if (!response.ok) throw new Error(`AI request failed (${response.status})`);
+  if (!response.ok) {
+    // Anthropic's error text (never the key) tells the owner what to fix: credits, key or model.
+    const detail = await response.json().then(body => (body as { error?: { message?: string } }).error?.message || '').catch(() => '');
+    throw new Error(`AI request failed (${response.status})${detail ? `: ${detail.slice(0, 200)}` : ''}`);
+  }
   const payload = await response.json() as { content?: { type: string; name?: string; input?: unknown }[] };
   const block = payload.content?.find(item => item.type === 'tool_use' && item.name === triageTool.name);
   if (!block) throw new Error('AI returned no triage');
@@ -199,8 +203,9 @@ export async function triageLead(db: D1Database, workspaceId: string, workspaceN
     await db.batch(statements);
     return { ok: true as const, triage };
   } catch (error) {
-    console.error('Front Desk triage failed', error instanceof Error ? error.message : 'unknown');
-    return { ok: false as const, reason: 'ai_failed' };
+    const detail = error instanceof Error ? error.message : 'unknown';
+    console.error('Front Desk triage failed', detail);
+    return { ok: false as const, reason: 'ai_failed', detail };
   }
 }
 
