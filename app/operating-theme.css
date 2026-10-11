@@ -73,5 +73,20 @@ html,body{background:var(--color-background);color:var(--color-ink)}
 @media(max-width:560px){.fd-flow-grid{grid-template-columns:1fr}}
 .os-footer-inner{grid-template-columns:minmax(240px,.8fr) minmax(0,1.2fr)}@media(max-width:760px){.os-footer-inner{grid-template-columns:1fr}}
 .fd-band aside p{margin:0 0 .6rem}.fd-band aside .os-button{margin-top:.8rem}
+/* Homepage: proof timeline + comparison (added 2026-10-11) */
+.mh-proof{background:#292923;color:#fff}
+.mh-proof .os-kicker{color:#f1c36b}
+.mh-proof .os-section-head p{color:#d8d0c4}
+.mh-proof-timeline{margin:2.5rem 0 0;padding:0;list-style:none;border-top:1px solid #4d4a42}
+.mh-proof-timeline li{display:grid;grid-template-columns:6.5rem 1fr;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid #4d4a42}
+.mh-proof-timeline b{font:800 .85rem monospace;color:#f1c36b;letter-spacing:.05em;white-space:nowrap}
+.mh-proof-timeline span{font-size:.95rem;color:#e6ded2}
+.mh-proof-timeline strong{color:#fff}
+.mh-proof-note{margin-top:1.5rem;color:#cfc7ba;font-family:Georgia,serif;font-style:italic}
+.mh-compare{background:#e9dfcf}
+.mh-compare .mh-system-list{border-color:#bdb19e}
+.mh-compare .mh-system-list article{border-color:#bdb19e}
+.mh-compare .mh-system-list p{color:#5f5c55}
+@media(max-width:560px){.mh-proof-timeline li{grid-template-columns:1fr;gap:.35rem}}
 .fd-buy{display:block;margin-top:.8rem;font-size:.9rem;font-weight:700;text-align:center;color:var(--color-dark-brown)}
 .os-site>.os-footer{display:block}.os-footer-inner>div{display:block}
