@@ -42,7 +42,7 @@ export const availableNow = [
   ['Human approvals', 'Review consequential records before an office handoff.'],
   ['Schedule and scheduled job dates', 'Keep scheduled dates and next actions connected to the job.'],
   ['Office handoffs and exports', 'Prepare reviewed information for an agreed export or assisted destination.'],
-  ['Permit Pathfinder', 'Find selected official jurisdiction resources and keep permit tracking connected to the job.'],
+  ['Permit Pathfinder', 'A hand-checked directory of official city and county permit resources, built into the CRM. Find the official starting point and keep permit tracking connected to the job.'],
   ['Authentication and company separation', 'Protect each Company Workspace and keep its records separated from other companies.'],
 ] as const;
 
@@ -64,7 +64,7 @@ export const homepageFaq = [
   { question: 'What is The Command Suite?', answer: 'It is a contractor CRM and operating workspace that keeps leads, customers, jobs, field updates, schedules, files, approvals, and office follow-up connected.' },
   { question: 'Does the crew need to learn another field app?', answer: 'No. A crew member can use a job-specific link to type or speak an update and attach supported files while the office works from the private workspace.' },
   { question: 'Does it replace QuickBooks?', answer: 'The Command Suite is the CRM for your customers, jobs, field-to-office workflow, schedules, files, and approvals. Keep your approved accounting system for bookkeeping, payroll, and tax reporting.' },
-  { question: 'Does Permit Pathfinder submit permits?', answer: 'No. Permit Pathfinder links to selected official jurisdiction resources and helps keep permit information organized with the job. Government sources remain authoritative.' },
+  { question: 'Does Permit Pathfinder submit permits?', answer: 'No. Permit Pathfinder is a hand-checked directory of official jurisdiction resources built into the CRM; it links to the official source and helps keep permit information organized with the job. Government sources remain authoritative.' },
   { question: 'What happens after the 14-day trial?', answer: 'Pricing and billing terms are confirmed before payment. The Command Suite is $149 per month after the 14-day free trial.' },
   { question: 'Why do you call customers Founding Partners?', answer: 'The Command Suite is being built alongside contractors—not simply sold to them. Founding Partners receive guided support and are encouraged to provide honest feedback that helps shape the product. The term does not create a legal partnership, joint venture, agency, or fiduciary relationship.' },
 ] as const;
